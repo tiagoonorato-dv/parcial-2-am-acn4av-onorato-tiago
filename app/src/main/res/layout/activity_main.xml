@@ -46,6 +46,7 @@
                 android:textSize="16sp"
                 android:layout_marginBottom="12dp"/>
 
+
             <!-- PERFIL PROFESIONAL -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,21 +70,35 @@
                     android:layout_gravity="center">
 
                     <TextView
+                        android:id="@+id/tvPetName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pet_name_value"
+                        android:text="Rocco"
                         android:textColor="@color/white"
                         android:textSize="22sp"
                         android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/tvPetBreed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pet_breed_value"
+                        android:text="Golden Retriever"
                         android:textColor="@color/text_secondary"
                         android:textSize="14sp"/>
+
                 </LinearLayout>
             </LinearLayout>
+
+
+            <!-- MODIFICAR PERFIL -->
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textColor="@color/pet_primary"
+                android:textSize="12sp"/>
 
             <!-- SECCIÓN VACUNAS -->
             <TextView

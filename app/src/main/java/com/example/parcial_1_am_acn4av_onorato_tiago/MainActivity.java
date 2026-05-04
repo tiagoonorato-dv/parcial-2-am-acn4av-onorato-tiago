@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText editAppointment;
     private Button btnSchedule;
     private LinearLayout containerAppointments;
+    private TextView tvPetName, tvPetBreed;
+    private Button btnEditProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
         editAppointment = findViewById(R.id.editAppointment);
         btnSchedule = findViewById(R.id.btnSchedule);
         containerAppointments = findViewById(R.id.containerAppointments);
+        tvPetName = findViewById(R.id.tvPetName);
+        tvPetBreed = findViewById(R.id.tvPetBreed);
+        btnEditProfile = findViewById(R.id.btnEditProfile);
+
+        // --- MOCK DE DATOS INICIALES ---
+        registrarVacunaDinamica("Antirrábica");
+        agregarConsultaDinamica("Control Mensual - 15:00hs");
 
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,11 +64,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarDialogoEdicion();
+            }
+        });
     }
 
     private void registrarVacunaDinamica(String nombreVacuna) {
         TextView nuevaVacunaEntry = new TextView(this);
-        nuevaVacunaEntry.setText("💉 Vacuna aplicada: " + nombreVacuna);
+        nuevaVacunaEntry.setText("Vacuna aplicada: " + nombreVacuna);
         nuevaVacunaEntry.setTextSize(16);
         nuevaVacunaEntry.setPadding(0, 8, 0, 8);
         nuevaVacunaEntry.setTextColor(getResources().getColor(R.color.text_main));
@@ -68,10 +84,41 @@ public class MainActivity extends AppCompatActivity {
 
     private void agregarConsultaDinamica(String datos) {
         TextView tv = new TextView(this);
-        tv.setText("🗓️ Turno: " + datos);
+        tv.setText("Turno: " + datos);
         tv.setTextColor(getResources().getColor(R.color.white));
         tv.setTextSize(16);
         tv.setPadding(0, 8, 0, 8);
         containerAppointments.addView(tv, 0);
+    }
+
+    private void mostrarDialogoEdicion() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        builder.setTitle("Editar Perfil de Mascota");
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(50, 40, 50, 10);
+
+        final EditText inputName = new EditText(this);
+        inputName.setHint("Nuevo nombre");
+        inputName.setText(tvPetName.getText().toString());
+        layout.addView(inputName);
+
+        final EditText inputBreed = new EditText(this);
+        inputBreed.setHint("Nueva raza");
+        inputBreed.setText(tvPetBreed.getText().toString());
+        layout.addView(inputBreed);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Guardar", (dialog, which) -> {
+            tvPetName.setText(inputName.getText().toString());
+            tvPetBreed.setText(inputBreed.getText().toString());
+            Toast.makeText(this, "Perfil actualizado", Toast.LENGTH_SHORT).show();
+        });
+
+        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+
+        builder.show();
     }
 }
