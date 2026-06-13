@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -34,10 +35,15 @@ public class EditProfileActivity extends AppCompatActivity {
                 String newName = etEditName.getText().toString();
                 String newBreed = etEditBreed.getText().toString();
 
+                // Preparamos el paquete de vuelta
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("new_name", newName);
                 returnIntent.putExtra("new_breed", newBreed);
 
+                // --- NUEVO: Ponelo acá para que avise al usuario que se guardó ---
+                Toast.makeText(EditProfileActivity.this, getString(R.string.toast_profile_updated), Toast.LENGTH_SHORT).show();
+
+                // Decimos que la operación fue exitosa y cerramos esta pantalla
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }

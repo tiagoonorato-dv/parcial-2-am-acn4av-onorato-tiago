@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     registrarVacunaDinamica(vaccineName);
                     editVaccine.setText("");
                 } else {
-                    Toast.makeText(MainActivity.this, "Por favor, escribe el nombre de la vacuna", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getString(R.string.toast_empty_vaccine), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -79,7 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void registrarVacunaDinamica(String nombreVacuna) {
         TextView nuevaVacunaEntry = new TextView(this);
-        nuevaVacunaEntry.setText("Vacuna aplicada: " + nombreVacuna);
+
+        // Acá se crea la variable:
+        String textoFormateado = getString(R.string.prefix_vaccine, nombreVacuna);
+
+        // ARREGLADO: Le quitamos la "d" al final para que se llame igual que arriba
+        nuevaVacunaEntry.setText(textoFormateado);
+
         nuevaVacunaEntry.setTextSize(16);
         nuevaVacunaEntry.setPadding(0, 8, 0, 8);
         nuevaVacunaEntry.setTextColor(getResources().getColor(R.color.text_main));
@@ -88,7 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void agregarConsultaDinamica(String datos) {
         TextView tv = new TextView(this);
-        tv.setText("Turno: " + datos);
+
+        // ARREGLADO: Usamos getString pasando el parámetro dinámico
+        String textoFormateado = getString(R.string.prefix_appointment, datos);
+        tv.setText(textoFormateado);
+
         tv.setTextColor(getResources().getColor(R.color.white));
         tv.setTextSize(16);
         tv.setPadding(0, 8, 0, 8);

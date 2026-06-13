@@ -1,18 +1,27 @@
 <resources>
-    <string name="app_name">PetCare Planner</string>
+    <string name="app_name">Veterinaria Rocco</string>
+
+    <!-- Pantalla Principal (Textos que te pedía el error) -->
     <string name="welcome_title">¡Bienvenido a la Veterinaria!</string>
-
-    <!-- Perfil de Mascota -->
-    <string name="pet_name_value">Rocco</string>
-    <string name="pet_breed_value">Golden Retriever</string>
-
-    <!-- Secciones -->
+    <string name="profile_section">Perfil</string>
+    <string name="registered_pets">Mascotas registradas:</string>
     <string name="section_vaccines">Registrar Vacunas</string>
-    <string name="section_appointments">Programar Consulta</string>
-
-    <!-- Botones y Hints -->
     <string name="hint_vaccine">Nombre de la vacuna</string>
-    <string name="hint_appointment">Día y Hora (ej: Lunes 14:00)</string>
     <string name="btn_add_vaccine">+</string>
-    <string name="btn_schedule">Agendar Turno</string>
+    <string name="section_appointments">Programar Consulta</string>
+    <string name="appointment_hint">Día y hora (Ej: Martes 16:00)</string>
+    <string name="btn_schedule">AGENDAR TURNO</string>
+    <string name="btn_edit">EDITAR</string>
+    <string name="toast_empty_vaccine">Por favor, escribe el nombre de la vacuna</string>
+
+    <!-- Prefijos dinámicos para Java -->
+    <string name="prefix_vaccine">Vacuna aplicada: %1$s</string>
+    <string name="prefix_appointment">Turno: %1$s</string>
+
+    <!-- Pantalla de Edición -->
+    <string name="title_edit_profile">Editar Perfil</string>
+    <string name="hint_pet_name">Nombre de la mascota</string>
+    <string name="hint_pet_breed">Raza de la mascota</string>
+    <string name="btn_save_changes">GUARDAR CAMBIOS</string>
+    <string name="toast_profile_updated">Perfil actualizado</string>
 </resources>
