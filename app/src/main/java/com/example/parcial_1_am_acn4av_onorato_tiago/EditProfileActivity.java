@@ -14,7 +14,6 @@ public class EditProfileActivity extends AppCompatActivity {
     private Button btnSaveProfile;
 
     @Override
-    // ARREGLADO: Ahora la estructura del método de ciclo de vida es la correcta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
