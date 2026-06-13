@@ -8,8 +8,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout containerAppointments;
     private TextView tvPetName, tvPetBreed;
     private Button btnEditProfile;
+    private android.widget.ImageView ivPetProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editVaccine = findViewById(R.id.editVaccine);
+        ivPetProfile = findViewById(R.id.ivPetProfile);
         btnAddVaccine = findViewById(R.id.btnAddVaccine);
         containerVaccines = findViewById(R.id.containerVaccines);
         editAppointment = findViewById(R.id.editAppointment);
@@ -75,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+
+        // Usamos solo "Glide" de forma directa
+        Glide.with(this)
+                .load("https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=500")
+                .placeholder(android.R.drawable.ic_menu_gallery)
+                .error(android.R.drawable.stat_notify_error)
+                .into(ivPetProfile);
     }
 
     private void registrarVacunaDinamica(String nombreVacuna) {
