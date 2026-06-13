@@ -1,5 +1,6 @@
 package com.example.parcial_1_am_acn4av_onorato_tiago;
 
+import android.content.Intent; // <--- ESTA IMPORTACIÓN FALTA
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -68,7 +69,10 @@ public class MainActivity extends AppCompatActivity {
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mostrarDialogoEdicion();
+                Intent intent = new Intent(MainActivity.this, EditProfileActivity.class);
+                intent.putExtra("current_name", tvPetName.getText().toString());
+                intent.putExtra("current_breed", tvPetBreed.getText().toString());
+                startActivityForResult(intent, 1);
             }
         });
     }
@@ -91,34 +95,16 @@ public class MainActivity extends AppCompatActivity {
         containerAppointments.addView(tv, 0);
     }
 
-    private void mostrarDialogoEdicion() {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("Editar Perfil de Mascota");
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(50, 40, 50, 10);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            String updatedName = data.getStringExtra("new_name");
+            String updatedBreed = data.getStringExtra("new_breed");
 
-        final EditText inputName = new EditText(this);
-        inputName.setHint("Nuevo nombre");
-        inputName.setText(tvPetName.getText().toString());
-        layout.addView(inputName);
-
-        final EditText inputBreed = new EditText(this);
-        inputBreed.setHint("Nueva raza");
-        inputBreed.setText(tvPetBreed.getText().toString());
-        layout.addView(inputBreed);
-
-        builder.setView(layout);
-
-        builder.setPositiveButton("Guardar", (dialog, which) -> {
-            tvPetName.setText(inputName.getText().toString());
-            tvPetBreed.setText(inputBreed.getText().toString());
-            Toast.makeText(this, "Perfil actualizado", Toast.LENGTH_SHORT).show();
-        });
-
-        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-
-        builder.show();
+            tvPetName.setText(updatedName);
+            tvPetBreed.setText(updatedBreed);
+        }
     }
 }
